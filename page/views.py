@@ -22,3 +22,6 @@ def partidos(request):
 
 def perfil(request):
     return render(request, 'perfil.html')
+
+def ranking(request):
+    return render(request, 'ranking.html')

@@ -15,5 +15,6 @@ urlpatterns = [
     path('partidos', views.partidos),
 
     path('perfil', views.perfil),
+    path('ranking', views.ranking),
 
 ]
