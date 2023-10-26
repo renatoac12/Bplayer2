@@ -19,3 +19,6 @@ def torneos(request):
 
 def partidos(request):
     return render(request, 'partidos.html')
+
+def perfil(request):
+    return render(request, 'perfil.html')

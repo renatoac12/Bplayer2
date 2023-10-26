@@ -14,4 +14,6 @@ urlpatterns = [
     path('torneos', views.torneos),
     path('partidos', views.partidos),
 
+    path('perfil', views.perfil),
+
 ]
