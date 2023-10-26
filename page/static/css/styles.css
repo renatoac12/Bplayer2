@@ -1,0 +1,157 @@
+body{
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-family: 'Raleway',sans-serif;
+}
+
+.banner{
+    height: 100vh;
+    width: 100%;
+/*     background: url('banner.jpg'); */
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.banner .navbar{
+    margin-top: 4%;
+}
+
+.banner .navbar-brand{
+    color: #fff;
+    font-size: 1.8em;
+    font-weight: 700;
+    margin-left: 10%;
+}
+
+.banner .nav{
+    margin-right:10%;
+}
+
+.banner .nav li a{
+    color: #aaa;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.banner .info{
+    margin-top: 15%;
+    transform: translateY(-15%);
+}
+
+.banner .info h1{
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.banner .info p{
+    font-size: 2em;
+    font-weight: 500;
+    color: #aaa;
+    letter-spacing: 2px;
+}
+
+.banner .info a{
+    margin-left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    background: #028C36;
+    padding: 10px 20px;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.banner .info a:hover{
+    text-decoration: none;
+    background: #385C45;
+    color: #fff;
+}
+
+.color-overlay{
+    width: 100%;
+    height: 100%;
+    background: #014e0cbd;
+}
+
+/*------REGISTRO----------*/
+
+
+#form-container {
+    background-color: #FFF;
+    border-radius: 20px;
+    box-shadow: .5px 10px 15px rgba(0, 0, 0, 0.2);
+    margin: 25px auto;
+    padding: 25px;
+  }
+  
+  @media(min-width: 768px) {
+    #form-container {
+      margin: 50px auto;
+      padding: 50px;
+    }
+  }
+  
+  #form-container h2 {
+    font-weight: 900;
+    margin-bottom: 30px;
+  }
+  
+  #form-container a {
+    color: #222;
+    transition: .5s;
+  }
+  
+  #form-container a:hover {
+    color: #6C63FF;
+  }
+  
+  #form-container form {
+    padding-bottom: 50px;
+  }
+  
+  #form-container .form-control {
+    border: none;
+    border-bottom: 1px solid #CCC;
+    border-radius: 0;
+  }
+  
+  #form-container .form-control:focus {
+    box-shadow: none;
+  }
+  
+  #form-container .form-floating label {
+    color: #CCC;
+  }
+  
+  #form-container .form-floating > .form-control:focus~label {
+    color: #222;
+  }
+  
+  #form-container .form-check-input:checked,
+  #form-container input[type="submit"] {
+    background-color: #6C63FF;
+    border-color: #6C63FF;
+  }
+  
+  .btn.btn-primary {
+    width: 100%;
+  }
+  
+  @media(min-width: 768px) {
+    .btn.btn-primary {
+      width: auto;
+    }
+  }
+  
+  .row.align-items-center {
+    align-content: center;
+    height: 100%;
+  }
+  
+  #link-container {
+    text-align: center;
+    padding-top: 50px;
+  }

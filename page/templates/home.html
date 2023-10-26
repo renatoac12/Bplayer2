@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load static %}
+
+
+<div class="container banner">
+    <div class="row">
+        <div class="col-md-12">
+            <nav class="navbar navbar-md">
+                <div class="navbar-brand">Bplayer</div>
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">INICIO</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signin">REGISTRARSE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">INICIAR SESION</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="col-md-6 offset-md-3 info">
+        
+        <p class="text-center">Sé parte de la nueva comunidad de deportistas en Chile. Vive la experiencia Bplayer</p>
+        <a href="/signin" class="btn btn-md text-center">Iniciar la aventura</a>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
