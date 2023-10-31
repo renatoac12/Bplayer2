@@ -3,9 +3,8 @@ from django.http import JsonResponse
 from .models import Numero
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
-
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
@@ -34,10 +33,16 @@ def logIn(request):
         if user is None:
             return render(request, 'login.html', {'form' : AuthenticationForm, 'error':'Usuario o contraseña incorrectos'})
         else:
+            login(request, user)
             return redirect('/inicio')
 
+@login_required
 def inicio(request):
     return render(request, 'pagInicial.html')
+
+def salirSesion(request):
+    logout(request)
+    return redirect('/home')
 
 def torneos(request):
     return render(request, 'torneos.html')
