@@ -17,4 +17,7 @@ urlpatterns = [
     path('perfil', views.perfil),
     path('ranking', views.ranking),
 
+    path('torneo1', views.torneo1),
+    path('cambiar_numero', views.cambiar_numero, name='cambiar_numero'),
+
 ]
