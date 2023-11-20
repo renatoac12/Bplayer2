@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
-from .models import Numero
+from .models import Numero, Post
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -38,7 +38,10 @@ def logIn(request):
 
 @login_required
 def inicio(request):
-    return render(request, 'pagInicial.html')
+    contexto = {
+        'posts': Post.objects.all()
+    }
+    return render(request, 'pagInicio.html', contexto)
 
 def salirSesion(request):
     logout(request)
