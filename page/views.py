@@ -5,7 +5,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 # Create your views here.
 
 def home(request):
@@ -78,13 +79,50 @@ def cambiar_numero(request):
 
 
 
-class postListView(ListView):
+class postListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'pagInicio.html'
     context_object_name = 'posts'
     ordering = ['-fecha_creacion']
 
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
     template_name = 'post_detail.html' 
+
+
+class PostCreateView(LoginRequiredMixin, CreateView ):
+    model = Post
+    fields = ['titulo', 'contenido']
+    template_name = 'post_form.html' 
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
+    
+    
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    fields = ['titulo', 'contenido']
+    template_name = 'post_form.html'
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.autor:
+            return True
+        return False
+    
+
+class PostDeleteView(DeleteView):
+    model = Post
+    success_url = '/inicio'
+    template_name = 'post_confirm_delete.html'
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.autor:
+            return True
+        return False

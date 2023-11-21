@@ -180,4 +180,15 @@ body{
 
   .detalles_post{
     margin-top: 100px;
+    border-radius: 15px; /* Ajusta el radio para lograr un borde más o menos redondeado */
+    border: 1px solid #ccc; /* Borde con color gris claro */
+    padding: 20px; /* Espaciado interno */
+    width: 100%; /* Ancho de la tarjeta */
+    background-color: #aaa; /* Fondo blanco */
   }
+
+  #crearPost{
+    margin-top: 150px;
+  }
+
+

@@ -8,9 +8,12 @@
     <h2>Bienvenido a Bplayer, {{ user.username }}</h2>
 </div>
 
+<a href="post/nuevoPost" class="btn btn-outline-primary rounded-0 float-end ms-3 mt-5">Crear nuevo post</a>
 
 <div id="contenidoInicio" class="container">
+    
     <h2>Mira las ultimas novedades</h2>
+    
     <br>
     <hr>
     {% for post in posts %}

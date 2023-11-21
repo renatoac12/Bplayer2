@@ -1,0 +1,35 @@
+{% extends "pagInicial.html" %}
+
+{% block content %}
+
+{% load static %}
+
+
+
+
+<div class="container" id="crearPost">
+    <h2 class="text-center">Borrar Post</h2>
+    <form action="" method="post"> 
+        {% csrf_token %}
+
+        <div class="form-group">
+            <h1 for="titulo">Hey, estás seguro de que quieres borrar esta publicación?: <b>{{ object.titulo }}</b></h1>
+            <br>
+            
+        </div>
+
+
+        <button type="submit" class="btn btn-primary mt-4">Borrar</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
