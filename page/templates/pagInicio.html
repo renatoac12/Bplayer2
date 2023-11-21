@@ -10,12 +10,12 @@
 
 
 <div id="contenidoInicio" class="container">
-    <h2>Mira lo que escriben</h2>
+    <h2>Mira las ultimas novedades</h2>
     <br>
     <hr>
     {% for post in posts %}
-    <h3>{{ post.titulo }}</h3>
-    <p>{{ post.contenido }}</p>
+    <h2><a href="{% url 'detalle_post' pk=post.id %}">{{ post.titulo }}</a></h2>
+    <h4 class="mt-4">{{ post.contenido }}</h4>
     <p>Por: {{ post.autor }} En {{ post.fecha_creacion }}</p>
     <hr>
     {% endfor %}
@@ -24,3 +24,4 @@
 
 
 {% endblock %}
+

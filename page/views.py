@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView, DetailView
 # Create your views here.
 
 def home(request):
@@ -75,3 +76,15 @@ def cambiar_numero(request):
     else:
         return JsonResponse({'error': 'Método no permitido'})
 
+
+
+class postListView(ListView):
+    model = Post
+    template_name = 'pagInicio.html'
+    context_object_name = 'posts'
+    ordering = ['-fecha_creacion']
+
+
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'post_detail.html' 

@@ -1,0 +1,34 @@
+{% extends "pagInicial.html" %}
+
+{% block content %}
+
+{% load static %}
+
+
+
+<div class="detalles_post">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ object.autor}}</a>
+            <small class="text-muted">{{ object.fecha_creacion}}</small>
+        </div>
+        <h2><a class="article-title" href="#">{{object.title}}</a></h2>
+        <p class="article-content">{{ object.contenido }} </p>
+    </div>
+    <br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
