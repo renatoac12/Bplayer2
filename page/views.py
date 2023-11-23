@@ -142,7 +142,7 @@ class PostDeleteView(DeleteView):
 class PartidoForm(forms.ModelForm):
     class Meta:
         model = Partido
-        fields = ['nombre', 'descripcion', 'arbitro', 'exp', 'imagenUrl', 'fecha_creacion']
+        fields = ['nombre', 'descripcion', 'arbitro', 'exp', 'tipo', 'imagenUrl', 'fecha_creacion']
 
     def form_valid(self, form):
         form.instance.autor = self.request.user

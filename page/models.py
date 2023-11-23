@@ -36,7 +36,11 @@ class Partido(models.Model):
         (SÍ, 'Sí'),
         (NO, 'No'),
     ]
-    
+
+    TIPO_CHOICES = [
+        (DOBLES, 'Dobles'),
+        (INDIVIDUAL, 'Individual'),
+    ]
 
 
 
@@ -45,6 +49,7 @@ class Partido(models.Model):
     descripcion = models.TextField()
     arbitro = models.CharField(max_length=3, choices=ARBITRO_CHOICES, default=SÍ)
     exp = models.CharField(max_length=3, choices=EXP_CHOICES, default=SÍ)
+    tipo = models.CharField(max_length=10, choices=TIPO_CHOICES, default=INDIVIDUAL)
     imagenUrl = models.ImageField(upload_to='static/img')
     fecha_creacion = models.DateTimeField(default=timezone.now)
     autor = models.ForeignKey(User, on_delete=models.CASCADE)
