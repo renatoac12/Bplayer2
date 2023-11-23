@@ -37,6 +37,9 @@ urlpatterns = [
     path('mis-partidos/', views.listar_mis_partidos, name='mis_partidos'),
     path('partidos/<int:pk>/', views.PartidoDetailView.as_view(), name='detalle_partido'),
     path('partidos/<int:pk>/borrar', views.PartidoDeleteView.as_view(), name='borrar_partido'),
+
+    #Valorar
+    path('valorar', views.valorar, name='valorar'),
 ]
     
 

@@ -35,6 +35,8 @@
             Inscribirse
           </button>
 
+
+          
           <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -86,12 +88,17 @@
             </div>
             </div>
         </div>
+        
+        <div>
+            <a class="btn btn-outline-danger" href="valorar_partido">Ir a Post-partido</a>
+        </div>
 
         {% endif %}
         </div>
         <br>
         {% if partido.autor == user %}
     <!-- Botones para editar o borrar -->
+    <br>
     <div>
         <a class="btn btn-outline-danger" href="{% url 'borrar_partido' partido.pk %}">Borrar</a>
     </div>

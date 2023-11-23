@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
+from django.views.generic import FormView
 
 # Create your views here.
 
@@ -209,6 +210,9 @@ class PartidoDeleteView(DeleteView):
         return False
 
 
+
+def valorar(request):
+    return render(request, 'valoracion.html')
 
 
 

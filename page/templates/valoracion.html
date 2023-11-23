@@ -1,0 +1,51 @@
+{% extends "pagInicial.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="div" style="height: 150px;"></div>
+
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>Califica tu Experiencia</h2>
+            </div>
+            <div class="card-body" style="text-align: center;">
+                <h5 class="card-title">Dejanos tu valoración del partido!</h5>
+                <span class="fa fa-star" style="cursor: pointer" onclick="calificar(this)" id="1estrella"></span>
+                <span class="fa fa-star" style="cursor: pointer" onclick="calificar(this)" id="2estrella"></span>
+                <span class="fa fa-star" style="cursor: pointer" onclick="calificar(this)" id="3estrella"></span>
+                <span class="fa fa-star" style="cursor: pointer" onclick="calificar(this)" id="4estrella"></span>
+                <span class="fa fa-star" style="cursor: pointer" onclick="calificar(this)" id="5estrella"></span><br>
+
+                <button type="button" class="btn btn-warning mt-3" onclick="mensaje()">Calificar</button>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var contador;
+        function calificar(item){
+            console.log(item);   
+            contador=item.id[0];
+            let nombre = item.id.substring(1);
+
+            for(let i=0; i<5; i++){
+                if(i<contador){
+                    document.getElementById((i+1)+nombre).style.color="orange";
+                }else{
+                    document.getElementById((i+1)+nombre).style.color="black";
+                }
+            }
+        }
+
+
+        function mensaje(){
+            alert("Gracias por tu valoración! Has calificado este partido con "+contador+" estrellas");
+        }
+    </script>
+
+
+{% endblock %}
