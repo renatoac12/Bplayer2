@@ -5,7 +5,7 @@
 {% load static %}
 
 <a href="partidos/crear-partido" class="btn btn-outline-primary rounded-0 float-end ms-3 mt-5">Crear partido</a>
-
+<a href="eliminar_partido" class="btn btn-outline-primary rounded-0 float-end ms-3 mt-5">Mis partidos</a>
 
 <div class="row mt-5 cardPartidos" >
   {% for partido in partidos %}
@@ -22,7 +22,7 @@
               {{ partido.descripcion }}
             </p>
           </div>
-          <a href="#" class="btn btn-outline-primary rounded-0 float-end"
+          <a href="{% url 'detalle_partido' pk=partido.id %}" class="btn btn-outline-primary rounded-0 float-end"
             >Saber más</a
           >
         </div>

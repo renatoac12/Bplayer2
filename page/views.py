@@ -1,5 +1,6 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.http import JsonResponse
+from django.urls import reverse_lazy
 from .models import Numero, Post, Partido
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -7,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django import forms
 # Create your views here.
 
 def home(request):
@@ -134,25 +136,40 @@ class PostDeleteView(DeleteView):
     
 # PARTIDOS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-class PartidoListView(LoginRequiredMixin, ListView):
-    model = Partido
-    template_name = 'partidos.html'
-    context_object_name = 'partidos'
-    ordering = ['-fecha_creacion']
 
+
+class PartidoForm(forms.ModelForm):
+    class Meta:
+        model = Partido
+        fields = ['nombre', 'descripcion', 'arbitro', 'exp', 'imagenUrl', 'fecha_creacion']
+
+
+
+
+def mi_vista_para_el_formulario(request):
+    if request.method == 'POST':
+        form = PartidoForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Procesa el formulario si es válido
+            form.save()
+            # Redirige a una página de éxito o haz lo que necesites hacer
+    else:
+        form = PartidoForm()
+    
+    return render(request, 'partido_form.html', {'form': form})
+
+#Detalles partidos
 
 class PartidoDetailView(LoginRequiredMixin, DetailView):
     model = Partido
-    template_name = 'partido_detail.html'
-    
+    template_name = 'partido_detail.html' 
 
-class PartidoCreateView(LoginRequiredMixin, CreateView ):
-    model = Partido
-    fields = ['nombre', 'descripcion', 'arbitro', 'exp', 'imagenUrl']
-    template_name = 'partido_form.html' 
 
-    def form_valid(self, form):
-        form.instance.autor = self.request.user
-        return super().form_valid(form)
+
+
+
+
+
+
 
 

@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.conf import settings
-from .views import postListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView, PartidoListView, PartidoCreateView, PartidoDetailView
+from .views import postListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
 from django.conf.urls.static import static
 
 urlpatterns = [
@@ -33,10 +33,11 @@ urlpatterns = [
 
     #PARTIDOS 
     path('partidos', views.partidos),
-    path('partidos/crear-partido', PartidoCreateView.as_view(), name='nuevo_partido'),
-    path('partidos/<int:pk>/', PartidoDetailView.as_view(), name='detalle_partido'),
-    
+    path('partidos/crear-partido', views.mi_vista_para_el_formulario, name='nuevo_partido'),
+    path('partidos/<int:pk>/', views.PartidoDetailView.as_view(), name='detalle_partido'),
 ]
+    
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

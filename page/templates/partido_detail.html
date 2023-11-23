@@ -9,13 +9,13 @@
 <div class="container contenido-torneo1">
    <div class="row">
     <div class="col-4 img-torneo1">
-        <img src="{% static "img/cancha1.jpg" %}" class="img-fluid" />
+        <img src="{{ partido.imagenUrl.url }}" class="img-fluid" />
     </div>
 
     <div class="col-6">
         <div class="row">
             <div class="col-12 mb-5">
-                <h2>Torneo Estelar de Tenis: Eleva tu Juego</h2>
+                <h2>{{ object.nombre }}</h2>
             </div>
         </div>
             <div class="col-12">
