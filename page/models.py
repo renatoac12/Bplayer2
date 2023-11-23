@@ -24,6 +24,8 @@ class Post(models.Model):
 class Partido(models.Model):
     SÍ = 'Sí'
     NO = 'No'
+    DOBLES = 'Dobles'
+    INDIVIDUAL = 'Individual'
 
     ARBITRO_CHOICES = [
         (SÍ, 'Sí'),
@@ -34,6 +36,9 @@ class Partido(models.Model):
         (SÍ, 'Sí'),
         (NO, 'No'),
     ]
+    
+
+
 
     
     nombre = models.CharField(max_length=200)
