@@ -1,0 +1,40 @@
+{% extends "pagInicial.html" %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="container" style="height: 150px; width: 300px;"></div>
+<h1>Mis Partidos</h1>
+<div class="row mt-5 cardPartidos" >
+    {% for partido in partidos %}
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="card mt-5 mb-5 shadow-sm" >
+          <img src="{{ partido.imagenUrl.url }}" class="img-fluid" style="height: 350px"/>
+  
+          <div class="card-body">
+             <div class="card-title">
+              <h2>{{ object.nombre }}</h2>
+            </div>
+            <div class="card-text">
+              <p>
+                {{ object.descripcion }}
+              </p>
+            </div>
+            <a href="{% url 'detalle_partido' pk=partido.id %}" class="btn btn-outline-primary rounded-0 float-end"
+              >Saber más</a
+            >
+          </div>
+        </div>
+      </div>
+  
+    {% endfor %}
+  
+     
+    </div>
+  
+
+
+
+
+{% endblock %}

@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
+
 # Create your views here.
 
 def home(request):
@@ -143,10 +144,16 @@ class PartidoForm(forms.ModelForm):
         model = Partido
         fields = ['nombre', 'descripcion', 'arbitro', 'exp', 'imagenUrl', 'fecha_creacion']
 
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
 
 
 
-def mi_vista_para_el_formulario(request):
+
+""" def mi_vista_para_el_formulario(request):
+
+
     if request.method == 'POST':
         form = PartidoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -155,14 +162,51 @@ def mi_vista_para_el_formulario(request):
             # Redirige a una página de éxito o haz lo que necesites hacer
     else:
         form = PartidoForm()
+
+        
+    
+    return render(request, 'partido_form.html', {'form': form}) """
+
+def mi_vista_para_el_formulario(request):
+    if request.method == 'POST':
+        form = PartidoForm(request.POST, request.FILES)
+        if form.is_valid():
+            partido = form.save(commit=False)
+            partido.autor = request.user  # Asignar el usuario actual al campo 'autor'
+            partido.save()
+            return redirect('detalle_partido', pk=partido.pk)
+            # Redirigir a una página de éxito o realizar otras acciones necesarias  # Reemplaza 'pagina_exito' con la URL correspondiente
+    else:
+        form = PartidoForm()
     
     return render(request, 'partido_form.html', {'form': form})
+
+#Listar mis partidos
+
+def listar_mis_partidos(request):
+    # Obtén todos los partidos asociados al usuario actualmente autenticado
+    partidos = Partido.objects.filter(autor=request.user)
+    
+    return render(request, 'mis_partidos.html', {'partidos': partidos})
+
 
 #Detalles partidos
 
 class PartidoDetailView(LoginRequiredMixin, DetailView):
     model = Partido
     template_name = 'partido_detail.html' 
+
+
+class PartidoDeleteView(DeleteView):
+    model = Partido
+    success_url = '/partidos'
+    template_name = 'partido_delete.html'
+
+    def test_func(self):
+        partido = self.get_object()
+        if self.request.user == partido.autor:
+            return True
+        return False
 
 
 
