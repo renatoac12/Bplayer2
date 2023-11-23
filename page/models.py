@@ -19,3 +19,15 @@ class Post(models.Model):
         
     def get_absolute_url(self):
         return reverse('detalle_post', kwargs={'pk': self.pk})
+    
+
+class Partido(models.Model):
+    nombre = models.CharField(max_length=200)
+    descripcion = models.TextField()
+    arbitro = models.TextChoices('Sí', 'No')
+    exp = models.TextChoices('Sí', 'No')
+    imagenUrl = models.ImageField(upload_to='static/img')
+    fecha_creacion = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.nombre

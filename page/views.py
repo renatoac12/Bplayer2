@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.http import JsonResponse
-from .models import Numero, Post
+from .models import Numero, Post, Partido
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -53,7 +53,9 @@ def torneos(request):
     return render(request, 'torneos.html')
 
 def partidos(request):
-    return render(request, 'partidos.html')
+    partidos = Partido.objects.all()
+    return render(request, 'partidos.html', {'partidos': partidos})
+
 
 def perfil(request):
     return render(request, 'perfil.html')
@@ -126,3 +128,10 @@ class PostDeleteView(DeleteView):
         if self.request.user == post.autor:
             return True
         return False
+    
+
+class PartidoListView(LoginRequiredMixin, ListView):
+    model = Partido
+    template_name = 'partidos.html'
+    context_object_name = 'partidos'
+    ordering = ['-fecha_creacion']
