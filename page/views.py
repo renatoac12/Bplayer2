@@ -81,6 +81,9 @@ def cambiar_numero(request):
 
 
 
+# POSTS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 class postListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'pagInicio.html'
@@ -129,9 +132,27 @@ class PostDeleteView(DeleteView):
             return True
         return False
     
+# PARTIDOS --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 class PartidoListView(LoginRequiredMixin, ListView):
     model = Partido
     template_name = 'partidos.html'
     context_object_name = 'partidos'
     ordering = ['-fecha_creacion']
+
+
+class PartidoDetailView(LoginRequiredMixin, DetailView):
+    model = Partido
+    template_name = 'partido_detail.html'
+    
+
+class PartidoCreateView(LoginRequiredMixin, CreateView ):
+    model = Partido
+    fields = ['nombre', 'descripcion', 'arbitro', 'exp', 'imagenUrl']
+    template_name = 'partido_form.html' 
+
+    def form_valid(self, form):
+        form.instance.autor = self.request.user
+        return super().form_valid(form)
+
+

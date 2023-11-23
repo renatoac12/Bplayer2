@@ -1,0 +1,72 @@
+{% extends "pagInicial.html" %}
+
+{% block content %}
+
+{% load static %}
+
+
+
+<div class="container contenido-torneo1">
+   <div class="row">
+    <div class="col-4 img-torneo1">
+        <img src="{% static "img/cancha1.jpg" %}" class="img-fluid" />
+    </div>
+
+    <div class="col-6">
+        <div class="row">
+            <div class="col-12 mb-5">
+                <h2>Torneo Estelar de Tenis: Eleva tu Juego</h2>
+            </div>
+        </div>
+            <div class="col-12">
+                <p>
+                    ¡Prepárate para una experiencia única en el mundo del tenis! Anunciamos nuestro Torneo Individual de Tenis, ¡un evento que elevará tus habilidades al siguiente nivel!
+                </p>
+                <p>-Modalidad: Individual</p>
+                <p>-Experiencia: Con o sin experiencia previa</p>
+                <br>
+                <p>¿Estás listo para el desafío? ¿Listo para vivir el espíritu del tenis individual? ¡Regístrate ahora y prepárate para competir en nuestro emocionante Torneo Individual de Tenis!</p>
+            
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <H3 class="float-end">Participantes:</H3>
+                <br>
+                <br>
+                <h2 class="float-end" id="numero">{{ numero.valor }} / 8</h2>
+                <br>
+                <br>
+                <button id="cambiar-btn" type="button" class="btn btn-outline-primary float-end">Inscribirse</button>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const button = document.getElementById('cambiar-btn');
+                        const numeroElement = document.getElementById('numero');
+                        
+                    button.addEventListener('click', function () {
+                    console.log('Hiciste clic en el botón');
+                    fetch('/cambiar_numero')  // Ruta que cambiará el número
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log(data);  // Verifica los datos que recibes
+                            numeroElement.textContent = data.nuevo_numero + ' / 8 ';
+                        });
+                });
+                    });
+
+                </script>
+
+            </div>
+        </div>
+    </div>
+   </div>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}

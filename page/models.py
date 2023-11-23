@@ -22,10 +22,23 @@ class Post(models.Model):
     
 
 class Partido(models.Model):
+    SÍ = 'Sí'
+    NO = 'No'
+
+    ARBITRO_CHOICES = [
+        (SÍ, 'Sí'),
+        (NO, 'No'),
+    ]
+
+    EXP_CHOICES = [
+        (SÍ, 'Sí'),
+        (NO, 'No'),
+    ]
+
     nombre = models.CharField(max_length=200)
     descripcion = models.TextField()
-    arbitro = models.TextChoices('Sí', 'No')
-    exp = models.TextChoices('Sí', 'No')
+    arbitro = models.CharField(max_length=3, choices=ARBITRO_CHOICES, default=SÍ)
+    exp = models.CharField(max_length=3, choices=EXP_CHOICES, default=SÍ)
     imagenUrl = models.ImageField(upload_to='static/img')
     fecha_creacion = models.DateTimeField(default=timezone.now)
     
