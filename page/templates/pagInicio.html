@@ -5,26 +5,25 @@
 {% load static %}
 
 <div id="inicioBienvenida" class="container">
-    <h2>Bienvenido a Bplayer, {{ user.username }}</h2>
+  <h2>Bienvenido a Bplayer, {{ user.username }}</h2>
 </div>
 
 <a href="post/nuevoPost" class="btn btn-outline-primary rounded-0 float-end ms-3 mt-5">Crear nuevo post</a>
 
 <div id="contenidoInicio" class="container">
-    
-    <h2>Mira las ultimas novedades</h2>
-    
-    <br>
-    <hr>
-    {% for post in posts %}
-    <h2><a href="{% url 'detalle_post' pk=post.id %}">{{ post.titulo }}</a></h2>
-    <h4 class="mt-4">{{ post.contenido }}</h4>
-    <p>Por: {{ post.autor }} En {{ post.fecha_creacion }}</p>
-    <hr>
-    {% endfor %}
-  </div>
+
+  <h2>Mira las ultimas novedades</h2>
+
+  <br>
+  <hr>
+  {% for post in posts %}
+  <h2><a href="{% url 'detalle_post' pk=post.id %}">{{ post.titulo }}</a></h2>
+  <h4 class="mt-4">{{ post.contenido }}</h4>
+  <p>Por: {{ post.autor }} En {{ post.fecha_creacion }}</p>
+  <hr>
+  {% endfor %}
+</div>
 
 
 
 {% endblock %}
-

@@ -1,37 +1,64 @@
 {% extends "pagInicial.html" %}
 
+
+
 {% block content %}
+
+
 
 {% load static %}
 
-<a href="partidos/crear-partido" class="btn btn-outline-primary rounded-0 float-end ms-3 mt-5">Crear partido</a>
-<a href="mis-partidos/" class="btn btn-outline-primary rounded-0 float-end ms-3 mt-5">Mis partidos</a>
 
-<div class="row mt-5 cardPartidos" >
+
+<h1 class="text-center" style="margin-top: 110px;">Mis Partidos</h1>
+
+<div class="row mt-5">
+
   {% for partido in partidos %}
-    <div class="col-lg-4 col-md-6 col-sm-12">
-      <div class="card mt-5 mb-5 shadow-sm" >
-        <img src="{{ partido.imagenUrl.url }}" class="img-fluid" style="height: 350px"/>
 
-        <div class="card-body">
-           <div class="card-title">
-            <h2>{{ partido.nombre }}</h2>
-          </div>
-          <div class="card-text">
-            <p>
-              {{ partido.descripcion }}
-            </p>
-          </div>
-          <a href="{% url 'detalle_partido' pk=partido.id %}" class="btn btn-outline-primary rounded-0 float-end"
-            >Saber más</a
-          >
+  <div class="col-lg-4 col-md-6 col-sm-12">
+
+    <div class="card mt-5 mb-5 shadow-sm">
+
+      <img src="{{ partido.imagenUrl.url }}" class="img-fluid" />
+
+
+
+      <div class="card-body">
+
+        <div class="card-title">
+
+          <h2>{{ partido.nombre }}</h2>
+
         </div>
+
+        <div class="card-text">
+
+          <p>{{ partido.descripcion }}</p>
+
+        </div>
+
+        <a href="{% url 'detalle_partido' pk=partido.id %}" class="btn btn-outline-primary rounded-0 float-end">Saber
+          más</a>
+
       </div>
+
     </div>
+
+  </div>
 
   {% endfor %}
 
-   
-  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 {% endblock %}

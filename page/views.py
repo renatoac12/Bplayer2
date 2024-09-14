@@ -10,7 +10,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
 from django.views.generic import FormView
-
+import requests
 # Create your views here.
 
 def home(request):
@@ -216,8 +216,87 @@ def valorar(request):
 
 
 
+def home(request):
+    import requests
+    
+    api_key = '4b83531b0b9d4c49ab833956242504'  # Reemplaza esto con tu API key de WeatherAPI
+    city = 'Santiago'  # Cambia a la ciudad deseada
+    url = f'https://api.weatherapi.com/v1/current.json?key={api_key}&q={city}'
+    response = requests.get(url)
+    data = response.json()
 
+    # Traducciones de las condiciones del clima
+    condition_translations = {
+        'Sunny': 'Soleado',
+        'Partly cloudy': 'Parcialmente nublado',
+        'Cloudy': 'Nublado',
+        'Overcast': 'Cubierto',
+        'Mist': 'Neblina',
+        'Patchy rain possible': 'Posibilidad de lluvia',
+        'Patchy snow possible': 'Posibilidad de nieve',
+        'Patchy sleet possible': 'Posibilidad de aguanieve',
+        'Patchy freezing drizzle possible': 'Posibilidad de llovizna helada',
+        'Thundery outbreaks possible': 'Posibilidad de tormentas',
+        'Blowing snow': 'Viento con nieve',
+        'Blizzard': 'Tormenta de nieve',
+        'Fog': 'Niebla',
+        'Freezing fog': 'Niebla helada',
+        'Patchy light drizzle': 'Llovizna ligera',
+        'Light drizzle': 'Llovizna',
+        'Freezing drizzle': 'Llovizna helada',
+        'Heavy freezing drizzle': 'Llovizna helada intensa',
+        'Patchy light rain': 'Lluvia ligera',
+        'Light rain': 'Lluvia',
+        'Moderate rain at times': 'Lluvia moderada',
+        'Moderate rain': 'Lluvia moderada',
+        'Heavy rain at times': 'Lluvia intensa',
+        'Heavy rain': 'Lluvia intensa',
+        'Light freezing rain': 'Lluvia helada ligera',
+        'Moderate or heavy freezing rain': 'Lluvia helada moderada o intensa',
+        'Light sleet': 'Aguanieve ligera',
+        'Moderate or heavy sleet': 'Aguanieve moderada o intensa',
+        'Patchy light snow': 'Nieve ligera',
+        'Light snow': 'Nieve ligera',
+        'Patchy moderate snow': 'Nieve moderada',
+        'Moderate snow': 'Nieve moderada',
+        'Patchy heavy snow': 'Nieve intensa',
+        'Heavy snow': 'Nieve intensa',
+        'Ice pellets': 'Granizo',
+        'Light rain shower': 'Chubasco ligero',
+        'Moderate or heavy rain shower': 'Chubasco moderado o intenso',
+        'Torrential rain shower': 'Chubasco torrencial',
+        'Light sleet showers': 'Aguanieve ligera',
+        'Moderate or heavy sleet showers': 'Aguanieve moderada o intensa',
+        'Light snow showers': 'Nieve ligera',
+        'Moderate or heavy snow showers': 'Nieve moderada o intensa',
+        'Light showers of ice pellets': 'Chubascos de granizo ligero',
+        'Moderate or heavy showers of ice pellets': 'Chubascos de granizo moderados o intensos',
+        'Patchy light rain with thunder': 'Lluvia ligera con truenos',
+        'Moderate or heavy rain with thunder': 'Lluvia moderada o intensa con truenos',
+        'Patchy light snow with thunder': 'Nieve ligera con truenos',
+        'Moderate or heavy snow with thunder': 'Nieve moderada o intensa con truenos'
+    }
 
+    # Verificar si 'current' está presente en los datos recibidos
+    if 'current' in data:
+        current_weather = data['current']
+        condition_text = current_weather['condition']['text']
+        # Traducir la condición del clima si está en las traducciones, de lo contrario, mantenerla igual
+        condition_text_translated = condition_translations.get(condition_text, condition_text)
 
+        weather_data = {
+            'icon_url': current_weather['condition']['icon'],  # La URL del ícono ya está proporcionada por la API
+            'location': data['location']['name'],  # Nombre de la ciudad
+            'temperature': current_weather['temp_c'],  # Temperatura en Celsius
+            'condition_text': condition_text_translated  # Descripción del clima traducida
+        }
+    else:
+        # Manejar el caso en que no se reciban datos del clima correctamente
+        weather_data = {
+            'icon_url': '',
+            'location': 'N/A',
+            'temperature': 'N/A',
+            'condition_text': 'No disponible'
+        }
 
-
+    return render(request, 'home.html', {'weather_data': weather_data})

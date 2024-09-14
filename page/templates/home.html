@@ -4,7 +4,6 @@
 
 {% load static %}
 
-
 <div class="container banner">
     <div class="row">
         <div class="col-md-12">
@@ -25,13 +24,70 @@
         </div>
     </div>
     <div class="col-md-6 offset-md-3 info">
-        
         <p class="text-center">Sé parte de la nueva comunidad de deportistas en Chile. Vive la experiencia Bplayer</p>
         <a href="/signin" class="btn btn-md text-center">Iniciar la aventura</a>
     </div>
 </div>
 
+<!-- Código de la aplicación del clima -->
+<div class="weather-card-container">
+    <div class="card p-3 floating-card">
+        <h1>Clima Actual</h1>
+        <div id="weather-info" class="d-flex align-items-center justify-content-center flex-wrap">
+            <div class="weather-card">
+                <img src="{{ weather_data.icon_url }}" alt="Ícono del Clima" class="weather-icon">
+                <div class="weather-text">
+                    <p>{{ weather_data.location }}</p>
+                    <p class="temperature">{{ weather_data.temperature }}°C</p>
+                    <p>{{ weather_data.condition_text }}</p>
+                </div>
+            </div>
+        </div>
+        <button class="close-btn" onclick="closeWeatherCard()">Cerrar</button>
+    </div>
+</div>
 
+<style>
+    /* Estilos personalizados para la tarjeta flotante */
+    .floating-card {
+        position: fixed;
+        top: 200px;
+        left: 50%;
+        /* Centro horizontalmente */
+        transform: translateX(-50%);
+        /* Centra horizontalmente */
+        z-index: 1000;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+        /* Añade sombreado */
+    }
 
+    .weather-card-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        font-weight: bold;
+    }
+
+    .close-btn {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        z-index: 1100;
+        /* Asegura que el botón esté encima de la tarjeta */
+    }
+</style>
+
+<script>
+    function closeWeatherCard() {
+        var cardContainer = document.querySelector('.weather-card-container');
+        cardContainer.style.display = 'none';
+    }
+</script>
 
 {% endblock %}
